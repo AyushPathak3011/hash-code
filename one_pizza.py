@@ -1,42 +1,47 @@
 #one pizza problem
 inputfile = 'c_coarse.in.txt'
-likes = []
-dislikes = []
-with open(inputfile,'r') as p:
-    data=p.readlines()
 
-for i in range(0,len(data)):
-    word=data[i].split()
-    #print(word)
+with open('Test Cases/'+inputfile,'r') as p:
+    inputdata=p.readlines()
 
-    if i%2!=0 :
-        likes = likes + word[1:]
-    if i%2==0 and i!=0:
-        dislikes = dislikes + word[1:]
-print(likes)
-print(dislikes)
-A = set(likes)
-B = set(dislikes)
-C = list( A -  B)
-C = [str(len(C))] + C
+class Customer:
+    def __init__(self, likes, dislikes):
+        self.likes = likes
+        self.dislikes = dislikes
+    
+    def __str__ (self):
+        return ("likes : " + " ".join(self.likes) + "\n" + "dislikes : " + " ".join(self.dislikes))
 
+cust = {}
 
+#creates objects for customers and assigns their preferences
+for i in range(1,len(inputdata),2):
+    line_list1 = inputdata[i].split()
+    line_list2 = inputdata[i+1].split()
+    """
+    #displays 2 consecutive lines
+    print(line_list1)
+    print(line_list2)
+    """
+    cust[int(((i+1)/2)-1)] = Customer(line_list1[1:], line_list2[1:])
 
-# 4 vxglq tfeej dlust luncl
-dict_likes={}
-dict_dislikes={}
-for i in A:
-    #print(i,likes.count(i))
-    dict_likes[i]=likes.count(i)
+"""
+#displays all the customers with their preferences
+for i in range(0,len(cust)):
+    print ("cust" + str(i))
+    print(cust[i])
+    print()
+"""
 
-for i in B:
-    #print(i,likes.count(i))
-    dict_dislikes[i]=dislikes.count(i)
+#finds the total no of people that will come to store
+def IngScore(a):
+    ingredients_list = a.split()
+    ingredients_list = list(filter(None, ingredients_list))
+    score = 0
+    for i in range(0,len(cust)):
+        if (not(set(cust[i].dislikes).issubset(set(ingredients_list)))):
+            if (set(cust[i].likes).issubset(set(ingredients_list))):
+                score += 1
+    return score
 
-
-dict_likes = dict( sorted(dict_likes.items(),key=lambda item: item[1],reverse=True))
-dict_dislikes = dict( sorted(dict_dislikes.items(),key=lambda item: item[1],reverse=True))
-print(dict_likes)
-print(dict_dislikes)
-
-print(" ".join(C))
+#print(IngScore(input("enter ingredients : ")))
