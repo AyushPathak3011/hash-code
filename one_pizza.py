@@ -64,7 +64,7 @@ print("Total customer interested :", IngScore(ingredients_list))
 """
 
 #this is the output
-print(len(set(ingredients_list))," ".join(list(set(ingredients_list))))
+#print(len(set(ingredients_list))," ".join(list(set(ingredients_list))))
 
 output_str=str(len(set(ingredients_list)))+ " " + " ".join(list(set(ingredients_list)))
 
