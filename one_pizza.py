@@ -65,3 +65,9 @@ print("Total customer interested :", IngScore(ingredients_list))
 
 #this is the output
 print(len(set(ingredients_list))," ".join(list(set(ingredients_list))))
+
+output_str=str(len(set(ingredients_list)))+ " " + " ".join(list(set(ingredients_list)))
+
+output_file=open('output.txt','w')
+output_file.write(output_str)
+output_file.close()
