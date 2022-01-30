@@ -40,10 +40,11 @@ def IngScore(a):
         if (not(set(cust[i].dislikes).issubset(set(ingredients_list)))) or (cust[i].dislikes == []):
             if (set(cust[i].likes).issubset(set(ingredients_list))):
                 score += 1
-                print ("cust" + str(i) + "\n", cust[i], "\n")
+                #print ("cust" + str(i) + "\n", cust[i], "\n")
     return score
 #print(IngScore(input("enter ingredients list : ")))
 
+#this is the actual procedural algorithm that adds ingredients that suits the majority of customers
 ingredients_list = []
 dislikes_list = []
 for i in range(0,len(cust)):
@@ -55,6 +56,12 @@ for i in range(0,len(cust)):
         if (cust[i].dislikes.count(i) > ingredients_list.count(i)):
             ingredients_list += cust[i].likes
     """
+
+"""
 print("Ingredients :", set(ingredients_list))
 print("Customers interested list : ")
 print("Total customer interested :", IngScore(ingredients_list))
+"""
+
+#this is the output
+print(len(set(ingredients_list))," ".join(list(set(ingredients_list))))
