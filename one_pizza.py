@@ -28,20 +28,33 @@ for i in range(1,len(inputdata),2):
 """
 #displays all the customers with their preferences
 for i in range(0,len(cust)):
-    print ("cust" + str(i))
-    print(cust[i])
-    print()
+    print ("cust" + str(i)+ "\n",cust[i],"n")
 """
 
 #finds the total no of people that will come to store
 def IngScore(a):
-    ingredients_list = a.split()
-    ingredients_list = list(filter(None, ingredients_list))
+    ingredients_list = a
+    #ingredients_list = list(filter(None, ingredients_list))
     score = 0
     for i in range(0,len(cust)):
-        if (not(set(cust[i].dislikes).issubset(set(ingredients_list)))):
+        if (not(set(cust[i].dislikes).issubset(set(ingredients_list)))) or (cust[i].dislikes == []):
             if (set(cust[i].likes).issubset(set(ingredients_list))):
                 score += 1
+                print ("cust" + str(i) + "\n", cust[i], "\n")
     return score
+#print(IngScore(input("enter ingredients list : ")))
 
-#print(IngScore(input("enter ingredients : ")))
+ingredients_list = []
+dislikes_list = []
+for i in range(0,len(cust)):
+    if ((not(set(cust[i].dislikes).issubset(set(ingredients_list)))) or cust[i].dislikes == []) and (set(cust[i].likes).isdisjoint(set(dislikes_list))):
+        ingredients_list += cust[i].likes
+        dislikes_list += cust[i].dislikes
+    """
+    else :
+        if (cust[i].dislikes.count(i) > ingredients_list.count(i)):
+            ingredients_list += cust[i].likes
+    """
+print("Ingredients :", set(ingredients_list))
+print("Customers interested list : ")
+print("Total customer interested :", IngScore(ingredients_list))
